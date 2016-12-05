@@ -6,14 +6,14 @@ import (
 
 func TestPortNumber(t *testing.T) {
 	var tests = []struct {
-		input interface{}
+		input int
 		want  bool
 	}{
 		{0, false},
 		{1, true},
 		{65535, true},
 		{65536, false},
-		{"sherlock", false},
+		{-100, false},
 	}
 
 	for _, test := range tests {

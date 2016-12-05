@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"strconv"
 )
 
 func main() {
@@ -16,7 +17,12 @@ func main() {
 		os.Exit(1)
 	}
 	port := os.Args[1]
-	if IsValidPort(port) {
+	portInt, err := strconv.Atoi(port)
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+	if IsValidPort(portInt) {
 		fmt.Println("Running on http://localhost:" + port)
 		http.ListenAndServe(":"+port, http.FileServer(http.Dir(".")))
 	} else {
@@ -25,16 +31,10 @@ func main() {
 }
 
 // IsValidPort will take an argument and return True if it is valid port and false othewise
-func IsValidPort(v interface{}) bool {
+func IsValidPort(v int) bool {
 	valid := false // we assume the port is wrong & return true otherwise
-	switch t := v.(type) {
-	case int:
-		if v.(int) > 0 {
-			if v.(int) <= 65535 {
-				valid = true
-			}
-		}
-		_ = t
+	if v > 0 && v <= 65535 {
+		valid = true
 	}
 	return valid
 }
