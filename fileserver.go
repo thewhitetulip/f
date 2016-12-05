@@ -36,9 +36,5 @@ func main() {
 
 // IsValidPort will take an argument and return True if it is valid port and false othewise
 func IsValidPort(v int) bool {
-	valid := false // we assume the port is wrong & return true otherwise
-	if v > 0 && v <= 65535 {
-		valid = true
-	}
-	return valid
+	return v > 0 && v <= 65535
 }
