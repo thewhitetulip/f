@@ -19,7 +19,7 @@ func main() {
 	port := os.Args[1]
 	portInt, err := strconv.Atoi(port)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println("This is not a number, please pass a valid number")
 		os.Exit(1)
 	}
 	if IsValidPort(portInt) {
