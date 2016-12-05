@@ -24,7 +24,11 @@ func main() {
 	}
 	if IsValidPort(portInt) {
 		fmt.Println("Running on http://localhost:" + port)
-		http.ListenAndServe(":"+port, http.FileServer(http.Dir(".")))
+		err := http.ListenAndServe(":"+port, http.FileServer(http.Dir(".")))
+		if err != nil {
+			fmt.Println("Please use another port number ")
+			os.Exit(1)
+		}
 	} else {
 		fmt.Println("Please pass valid port number.(1-65535)")
 	}
